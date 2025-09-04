@@ -49,7 +49,7 @@ const DataPage: React.FC = () => {
         drift.updateSelectedTradeMarket(null);
       }
     };
-  }, []);
+  }, [drift]);
 
   return (
     <div className="container mx-auto px-4 py-8 space-y-8">
