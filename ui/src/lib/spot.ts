@@ -1,5 +1,5 @@
 import { BigNum, SpotMarketConfig } from "@drift-labs/sdk";
-import { TOKEN_PROGRAM_ID } from "@drift/common";
+import { TOKEN_PROGRAM_ID } from "@drift-labs/common";
 import { PublicKey } from "@solana/web3.js";
 import { Connection } from "@solana/web3.js";
 
