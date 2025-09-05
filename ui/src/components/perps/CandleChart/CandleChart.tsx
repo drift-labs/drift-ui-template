@@ -17,9 +17,9 @@ import {
   HistogramSeries,
   HistogramData,
 } from "lightweight-charts";
-import { Card, CardContent, CardHeader, CardTitle } from "../../ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "../../ui/cardd";
 import { FormSelect } from "../../ui/form-select";
-import { Button } from "../../ui/button";
+import { Button } from "../../ui/buttonn";
 import { BarChart3, Loader2, AlertCircle, RefreshCw } from "lucide-react";
 import { CandleClient } from "@drift/common";
 import { MarketId, JsonCandle } from "@drift/common";

@@ -7,7 +7,7 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
-} from "../../components/ui/card";
+} from "../../components/ui/cardd";
 import { ArrowUpDown, AlertCircle } from "lucide-react";
 import { useUserAccountDataStore } from "@/stores/UserAccountDataStore";
 import { SpotBalanceTable } from "../../components/spot/SpotBalanceTable";

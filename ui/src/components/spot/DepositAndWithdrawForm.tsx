@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { SpotMarketConfig, BigNum } from "@drift-labs/sdk";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
-import { Button } from "../ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/cardd";
+import { Button } from "../ui/buttonn";
 import { FormInput } from "../ui/form-input";
 import { FormSelect } from "../ui/form-select";
 import {
