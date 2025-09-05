@@ -6,7 +6,10 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "install-vercel": "sh ./scripts/install-vercel.sh",
+    "build-vercel": "sh ./scripts/build-vercel.sh",
+    "setup": "bun run install-vercel && bun run build-vercel"
   },
   "dependencies": {
     "@drift-labs/sdk": "^2.136.0",

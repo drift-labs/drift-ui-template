@@ -29,7 +29,6 @@ print_message "Node version:"
 node -v
 
 # Build tasks
-cd ./ui
 base_directory=$(pwd) # EXPECT THIS TO BE THE UI FOLDER
 
 build "../drift-common/common-ts" "" ""

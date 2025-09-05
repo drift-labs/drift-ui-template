@@ -53,6 +53,9 @@ function bun_install_and_link() {
 # Stop execution on error - don't let it build if something goes wrong
 set -e
 
+# Go to root directory
+cd ..
+
 # Install submodules
 handle_public_submodule "." "drift-common"
 
