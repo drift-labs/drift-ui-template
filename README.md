@@ -40,14 +40,7 @@ git clone <your-repository-url>
 cd drift-ui-template
 ```
 
-### 2. Initialize and update submodules
-
-```bash
-git submodule init
-git submodule update
-```
-
-### 3. Install dependencies
+### 2. Install dependencies
 
 Navigate to the UI directory and install dependencies:
 
@@ -58,23 +51,7 @@ npm install
 bun install
 ```
 
-### 4. Set up drift-common (if needed)
-
-```bash
-cd ../drift-common
-yarn
-cd protocol
-yarn
-yarn build
-cd sdk
-yarn
-yarn build
-npm link
-cd ../..
-npm link @drift-labs/sdk
-```
-
-### 5. Configure environment variables
+### 3. Configure environment variables
 
 Create a `.env.local` file in the `ui` directory:
 
@@ -83,7 +60,7 @@ NEXT_PUBLIC_SOLANA_MAINNET_RPC_ENDPOINT=your_mainnet_rpc_url
 NEXT_PUBLIC_SOLANA_DEVNET_RPC_ENDPOINT=your_devnet_rpc_url
 ```
 
-### 6. Start the development server
+### 4. Start the development server
 
 ```bash
 cd ui
