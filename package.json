@@ -1,0 +1,11 @@
+{
+  "name": "drift-ui-template",
+  "version": "1.0.0",
+  "description": "UI template that integrates the Drift program, using the simplified AuthorityDrift class from @drift/common.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
