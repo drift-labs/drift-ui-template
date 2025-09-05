@@ -33,16 +33,21 @@ export const CreateUserForm = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     setIsLoading(true);
 
     try {
       await onSubmit({ selectedMarketIndex, amount });
-      
-      toast.success(`Successfully created account and deposited ${amount} ${selectedSpotMarketSymbol}`);
+
+      toast.success(
+        `Successfully created account and deposited ${amount} ${selectedSpotMarketSymbol}`,
+      );
       setAmount("");
     } catch (error) {
-      handleErrorToast(error, "Failed to create account and deposit. Please try again.");
+      handleErrorToast(
+        error,
+        "Failed to create account and deposit. Please try again.",
+      );
     } finally {
       setIsLoading(false);
     }
@@ -62,9 +67,7 @@ export const CreateUserForm = ({
             <FormSelect
               label="Token"
               value={selectedMarketIndex.toString()}
-              onValueChange={(value) =>
-                setSelectedMarketIndex(Number(value))
-              }
+              onValueChange={(value) => setSelectedMarketIndex(Number(value))}
               required
               options={spotMarketConfigs.map((marketConfig) => ({
                 value: marketConfig.marketIndex.toString(),
@@ -96,13 +99,10 @@ export const CreateUserForm = ({
                   <div className="text-sm text-gray-300 space-y-1">
                     <p>• A new Drift account will be created for you</p>
                     <p>
-                      • {amount || "0"} {selectedSpotMarketSymbol} will
-                      be deposited as collateral
+                      • {amount || "0"} {selectedSpotMarketSymbol} will be
+                      deposited as collateral
                     </p>
-                    <p>
-                      • You&apos;ll be able to trade spots and
-                      perpetuals
-                    </p>
+                    <p>• You&apos;ll be able to trade spots and perpetuals</p>
                   </div>
                 </div>
               </div>
