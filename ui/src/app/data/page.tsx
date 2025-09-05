@@ -138,6 +138,16 @@ const DataPage: React.FC = () => {
                     return marketIdA.marketIndex - marketIdB.marketIndex;
                   });
 
+                  spotMarkets.sort((a, b) => {
+                    const marketIdA = MarketId.getMarketIdFromKey(
+                      a as MarketKey,
+                    );
+                    const marketIdB = MarketId.getMarketIdFromKey(
+                      b as MarketKey,
+                    );
+                    return marketIdA.marketIndex - marketIdB.marketIndex;
+                  });
+
                   const renderMarketRows = (marketKeys: string[]) =>
                     marketKeys.map((marketKey) => {
                       const markData = markPriceLookup[marketKey as MarketKey];

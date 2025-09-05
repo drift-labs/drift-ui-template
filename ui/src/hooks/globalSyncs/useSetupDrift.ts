@@ -2,11 +2,12 @@ import { useDriftStore } from "@/stores/DriftStore";
 import { useMarkPriceStore } from "@/stores/MarkPriceStore";
 import { useOraclePriceStore } from "@/stores/OraclePriceStore";
 import { useUserAccountDataStore } from "@/stores/UserAccountDataStore";
-import { DriftEnv, IWallet } from "@drift-labs/sdk";
+import { DriftEnv, IWallet, MarketType } from "@drift-labs/sdk";
 import {
   AuthorityDrift,
   AuthorityDriftConfig,
   COMMON_UI_UTILS,
+  MarketId,
   UserAccountCache,
 } from "@drift/common";
 import { useWallet } from "@solana/wallet-adapter-react";
@@ -32,12 +33,13 @@ const _DEVNET_DRIFT_CONFIG: PartialAuthorityDriftConfig = {
 const MAINNET_DRIFT_CONFIG: AuthorityDriftConfig = {
   solanaRpcEndpoint: process.env.NEXT_PUBLIC_SOLANA_MAINNET_RPC_ENDPOINT!,
   driftEnv: "mainnet-beta" as DriftEnv,
-  // tradableMarkets: [
-  //   new MarketId(0, MarketType.SPOT), // USDC
-  //   new MarketId(1, MarketType.SPOT), // SOL
-  //   new MarketId(0, MarketType.PERP), // SOL-PERP
-  //   new MarketId(1, MarketType.PERP), // BTC-PERP
-  // ],
+  tradableMarkets: [
+    new MarketId(0, MarketType.SPOT), // USDC
+    new MarketId(1, MarketType.SPOT), // SOL
+    new MarketId(0, MarketType.PERP), // SOL-PERP
+    new MarketId(1, MarketType.PERP), // BTC-PERP
+    new MarketId(2, MarketType.PERP), // ETH-PERP
+  ],
 };
 
 export const useSetupDrift = () => {
