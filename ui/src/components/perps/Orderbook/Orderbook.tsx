@@ -302,9 +302,13 @@ export const Orderbook: React.FC<OrderbookProps> = ({ selectedMarketId }) => {
         const container = scrollContainerRef.current;
         const containerRect = container.getBoundingClientRect();
         const elementRect = markPriceElement.getBoundingClientRect();
-        
-        const scrollTop = container.scrollTop + (elementRect.top - containerRect.top) - (containerRect.height / 2) + (elementRect.height / 2);
-        
+
+        const scrollTop =
+          container.scrollTop +
+          (elementRect.top - containerRect.top) -
+          containerRect.height / 2 +
+          elementRect.height / 2;
+
         container.scrollTop = scrollTop;
         hasScrolledToCenter.current = true;
       }
