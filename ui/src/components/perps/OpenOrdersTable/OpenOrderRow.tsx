@@ -8,7 +8,7 @@ import {
   MarketId,
   TRADING_UTILS,
   UISerializableOrder,
-} from "@drift/common";
+} from "@drift-labs/common";
 import { PositionDirection } from "@drift-labs/sdk";
 import { useDriftStore } from "@/stores/DriftStore";
 import { X } from "lucide-react";
@@ -58,7 +58,7 @@ export function OpenOrderRow({ order }: OpenOrderRowProps) {
         subAccountId: activeSubAccountId,
         orderIds: [order.orderId],
       });
-      
+
       toast.success(`Order ${order.orderId} cancelled successfully`);
     } catch (error) {
       handleErrorToast(error, "Failed to cancel order. Please try again.");

@@ -1,6 +1,6 @@
 import { produce } from "immer";
 import { create } from "zustand";
-import { AuthorityDrift } from "@drift/common";
+import { AuthorityDrift } from "@drift-labs/common";
 import { SpotMarketConfig, PerpMarketConfig, BigNum } from "@drift-labs/sdk";
 
 export interface DriftStore {

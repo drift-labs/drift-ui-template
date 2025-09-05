@@ -1,5 +1,5 @@
 import { OraclePriceData } from "@drift-labs/sdk";
-import { MarketId, OraclePriceLookup } from "@drift/common";
+import { MarketId, OraclePriceLookup } from "@drift-labs/common";
 import { produce } from "immer";
 import { create } from "zustand";
 

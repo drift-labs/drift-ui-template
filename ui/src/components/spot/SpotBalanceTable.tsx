@@ -22,7 +22,7 @@ import {
   ArrowDown,
 } from "lucide-react";
 import { useUserAccountDataStore } from "@/stores/UserAccountDataStore";
-import { MarketId, UserAccountCache } from "@drift/common";
+import { MarketId, UserAccountCache } from "@drift-labs/common";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { SpotBalanceTableRow } from "./SpotBalanceTableRow";
 import { useOraclePriceStore } from "@/stores/OraclePriceStore";

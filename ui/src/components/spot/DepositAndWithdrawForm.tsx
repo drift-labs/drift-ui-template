@@ -14,7 +14,7 @@ import { toast } from "sonner";
 import { handleErrorToast } from "@/utils/toastUtils";
 import { useDriftStore } from "@/stores/DriftStore";
 import { useUserAccountDataStore } from "@/stores/UserAccountDataStore";
-import { EnhancedAccountData } from "@drift/common";
+import { EnhancedAccountData } from "@drift-labs/common";
 import { useWalletSpotBalances } from "@/hooks/spot/useWalletSpotBalances";
 
 type ActionType = "deposit" | "withdraw";

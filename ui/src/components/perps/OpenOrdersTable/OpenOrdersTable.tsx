@@ -15,7 +15,7 @@ import {
 } from "../../ui";
 import { useUserAccountDataStore } from "@/stores/UserAccountDataStore";
 import { OpenOrderRow } from "./OpenOrderRow";
-import { UISerializableOrder } from "@drift/common";
+import { UISerializableOrder } from "@drift-labs/common";
 import { useDriftStore } from "@/stores/DriftStore";
 
 const DEFAULT_OPEN_ORDERS: UISerializableOrder[] = [];

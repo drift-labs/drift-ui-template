@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { SwiftClient } from "@drift/common";
+import { SwiftClient } from "@drift-labs/common";
 import { useDriftStore } from "../../stores/DriftStore";
 
 export const useSyncSwiftClientHealth = () => {

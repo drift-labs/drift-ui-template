@@ -2,7 +2,7 @@ import {
   EnhancedAccountData,
   UserAccountCache,
   UserAccountLookup,
-} from "@drift/common";
+} from "@drift-labs/common";
 import { produce } from "immer";
 import { create } from "zustand";
 import { useDriftStore } from "./DriftStore";

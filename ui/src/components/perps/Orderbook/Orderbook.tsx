@@ -9,9 +9,9 @@ import {
   DEFAULT_ORDERBOOK_GROUPING,
   L2WithOracleAndMarketData,
   TRADING_UTILS,
-} from "@drift/common";
-import { MarketId } from "@drift/common";
-import { OrderbookGrouping } from "@drift/common";
+} from "@drift-labs/common";
+import { MarketId } from "@drift-labs/common";
+import { OrderbookGrouping } from "@drift-labs/common";
 import {
   BigNum,
   PRICE_PRECISION_EXP,

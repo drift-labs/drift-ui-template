@@ -1,4 +1,4 @@
-import { MarkPriceLookup } from "@drift/common";
+import { MarkPriceLookup } from "@drift-labs/common";
 import { produce } from "immer";
 import { create } from "zustand";
 

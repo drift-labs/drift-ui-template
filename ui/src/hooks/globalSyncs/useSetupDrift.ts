@@ -9,7 +9,7 @@ import {
   COMMON_UI_UTILS,
   MarketId,
   UserAccountCache,
-} from "@drift/common";
+} from "@drift-labs/common";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useEffect, useRef } from "react";
 

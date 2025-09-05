@@ -13,7 +13,7 @@ import {
   MarketId,
   PerpPositionInfo,
   TRADING_UTILS,
-} from "@drift/common";
+} from "@drift-labs/common";
 import {
   BigNum,
   PositionDirection,

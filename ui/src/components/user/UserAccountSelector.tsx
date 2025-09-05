@@ -3,7 +3,7 @@
 import React from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { useUserAccountDataStore } from "@/stores/UserAccountDataStore";
-import { EnhancedAccountData, UserAccountCache } from "@drift/common";
+import { EnhancedAccountData, UserAccountCache } from "@drift-labs/common";
 import { User, ChevronDown, CheckCircle2 } from "lucide-react";
 import {
   DropdownMenu,

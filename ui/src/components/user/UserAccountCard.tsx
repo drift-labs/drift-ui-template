@@ -4,7 +4,7 @@ import React from "react";
 import { Button } from "../ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import { Trash2, CheckCircle2 } from "lucide-react";
-import { EnhancedAccountData } from "@drift/common";
+import { EnhancedAccountData } from "@drift-labs/common";
 
 interface UserAccountCardProps {
   account: EnhancedAccountData;

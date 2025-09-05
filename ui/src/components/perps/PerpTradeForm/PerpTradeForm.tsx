@@ -12,7 +12,7 @@ import {
   AssetSizeType,
   PerpOrderType,
 } from "./hooks/usePerpTrading";
-import { ENUM_UTILS } from "@drift/common";
+import { ENUM_UTILS } from "@drift-labs/common";
 
 interface PerpTradeFormProps {
   perpMarketConfigs: PerpMarketConfig[];

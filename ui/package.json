@@ -12,8 +12,8 @@
     "setup": "bun run install-vercel && bun run build-vercel"
   },
   "dependencies": {
+    "@drift-labs/common": "^1.0.0",
     "@drift-labs/sdk": "^2.136.0",
-    "@drift/common": "file:../drift-common/common-ts",
     "@radix-ui/react-dropdown-menu": "^2.1.16",
     "@radix-ui/react-label": "^2.1.7",
     "@radix-ui/react-select": "^2.2.5",

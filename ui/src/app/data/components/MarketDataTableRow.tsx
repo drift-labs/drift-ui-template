@@ -4,7 +4,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { TableCell, TableRow } from "@/components/ui/table";
 import { useGetPerpMarketTickSizeDecimals } from "@/hooks/markets/useGetPerpMarketTickSizeDecimals";
 import { BigNum, BN, PRICE_PRECISION_EXP } from "@drift-labs/sdk";
-import { MarketId, MarketKey } from "@drift/common";
+import { MarketId, MarketKey } from "@drift-labs/common";
 import { cn } from "@/lib/utils";
 import { useDriftStore } from "@/stores/DriftStore";
 

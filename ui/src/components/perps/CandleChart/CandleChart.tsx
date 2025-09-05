@@ -21,9 +21,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "../../ui/card";
 import { FormSelect } from "../../ui/form-select";
 import { Button } from "../../ui/button";
 import { BarChart3, Loader2, AlertCircle, RefreshCw } from "lucide-react";
-import { CandleClient } from "@drift/common";
-import { MarketId, JsonCandle } from "@drift/common";
-import { UIEnv } from "@drift/common";
+import { CandleClient } from "@drift-labs/common";
+import { MarketId, JsonCandle } from "@drift-labs/common";
+import { UIEnv } from "@drift-labs/common";
 import { CandleResolution } from "@drift-labs/sdk";
 
 interface CandleChartProps {

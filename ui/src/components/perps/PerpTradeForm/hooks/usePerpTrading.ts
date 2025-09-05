@@ -12,9 +12,9 @@ import {
 } from "@drift-labs/sdk";
 import { useDriftStore } from "@/stores/DriftStore";
 import { useUserAccountDataStore } from "@/stores/UserAccountDataStore";
-import { ENUM_UTILS, PerpOrderParams, GeoBlockError } from "@drift/common";
+import { ENUM_UTILS, PerpOrderParams, GeoBlockError } from "@drift-labs/common";
 import { toast } from "sonner";
-import { SwiftOrderResult } from "@drift/common";
+import { SwiftOrderResult } from "@drift-labs/common";
 import { TransactionSignature } from "@solana/web3.js";
 
 export type PerpOrderType =

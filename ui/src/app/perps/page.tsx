@@ -19,7 +19,7 @@ import { Orderbook } from "../../components/perps/Orderbook";
 import { CandleChart } from "../../components/perps/CandleChart";
 import { FormSelect } from "../../components/ui/form-select";
 import { DEFAULT_PERP_MARKET_INDEX } from "../../constants/defaultMarkets";
-import { MarketId, TRADING_UTILS } from "@drift/common";
+import { MarketId, TRADING_UTILS } from "@drift-labs/common";
 import { BigNum, PRICE_PRECISION_EXP, ZERO } from "@drift-labs/sdk";
 
 export default function PerpsPage() {

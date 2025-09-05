@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/table";
 import { useMarkPriceStore } from "@/stores/MarkPriceStore";
 import { useOraclePriceStore } from "@/stores/OraclePriceStore";
-import { MarketId, MarketKey } from "@drift/common";
+import { MarketId, MarketKey } from "@drift-labs/common";
 import {
   MarketDataTableRow,
   MarketDividerRow,
