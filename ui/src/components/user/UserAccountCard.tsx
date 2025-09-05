@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Button } from "../ui/buttonn";
+import { Button } from "../ui/button";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../ui/tooltip";
 import { Trash2, CheckCircle2 } from "lucide-react";
 import { EnhancedAccountData } from "@drift/common";

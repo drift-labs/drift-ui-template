@@ -8,8 +8,8 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
-} from "../components/ui/cardd";
-import { Button } from "../components/ui/buttonn";
+} from "../components/ui/card";
+import { Button } from "../components/ui/button";
 import { User, ArrowUpDown, TrendingUp, Wallet } from "lucide-react";
 
 export default function Home() {

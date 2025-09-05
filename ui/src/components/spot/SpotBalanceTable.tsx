@@ -5,7 +5,7 @@ import {
   QUOTE_PRECISION_EXP,
   SpotMarketConfig,
 } from "@drift-labs/sdk";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/cardd";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import {
   Table,
   TableHeader,

@@ -1,8 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "../ui/cardd";
-import { Button } from "../ui/buttonn";
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
+import { Button } from "../ui/button";
 import { FormInput } from "../ui/form-input";
 import { FormSelect } from "../ui/form-select";
 import { Plus } from "lucide-react";

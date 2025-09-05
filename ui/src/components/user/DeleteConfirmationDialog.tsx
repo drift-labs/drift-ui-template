@@ -9,7 +9,7 @@ import {
   DialogDescription,
   DialogFooter,
 } from "../ui/dialog";
-import { Button } from "../ui/buttonn";
+import { Button } from "../ui/button";
 import { Trash2 } from "lucide-react";
 
 interface DeleteConfirmationDialogProps {

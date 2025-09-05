@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useMemo, useRef } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "../../ui/cardd";
+import { Card, CardContent, CardHeader, CardTitle } from "../../ui/card";
 import { FormSelect } from "../../ui/form-select";
 import { useDriftStore } from "@/stores/DriftStore";
 import { useMarkPriceStore } from "@/stores/MarkPriceStore";

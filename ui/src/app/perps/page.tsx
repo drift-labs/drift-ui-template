@@ -7,7 +7,7 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
-} from "../../components/ui/cardd";
+} from "../../components/ui/card";
 import { TrendingUp, AlertCircle, DollarSign } from "lucide-react";
 import { useDriftStore } from "@/stores/DriftStore";
 import { useMarkPriceStore } from "@/stores/MarkPriceStore";

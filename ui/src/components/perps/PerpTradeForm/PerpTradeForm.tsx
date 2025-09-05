@@ -2,8 +2,8 @@
 
 import React from "react";
 import { PerpMarketConfig, PositionDirection } from "@drift-labs/sdk";
-import { Card, CardContent, CardHeader, CardTitle } from "../../ui/cardd";
-import { Button } from "../../ui/buttonn";
+import { Card, CardContent, CardHeader, CardTitle } from "../../ui/card";
+import { Button } from "../../ui/button";
 import { FormInput } from "../../ui/form-input";
 import { FormSelect } from "../../ui/form-select";
 import { Target, TrendingUp, TrendingDown } from "lucide-react";

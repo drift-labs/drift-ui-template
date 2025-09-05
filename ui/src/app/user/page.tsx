@@ -6,7 +6,7 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
-} from "../../components/ui/cardd";
+} from "../../components/ui/card";
 import { TooltipProvider } from "../../components/ui/tooltip";
 import { User, Coins, AlertCircle, CheckCircle2 } from "lucide-react";
 import { UserAccountCard } from "../../components/user/UserAccountCard";
