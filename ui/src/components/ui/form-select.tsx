@@ -5,7 +5,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "./selectt";
+} from "./select";
 import { Label } from "./label";
 import { cn } from "@/lib/utils";
 
