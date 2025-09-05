@@ -1,13 +1,13 @@
 export { Button } from "./button";
 export { Card, CardContent, CardHeader, CardTitle } from "./card";
-export { Input } from "./input";
+export { Input } from "./inputt";
 export {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "./select";
+} from "./selectt";
 export { Label } from "./label";
 export { FormInput } from "./form-input";
 export { FormSelect } from "./form-select";

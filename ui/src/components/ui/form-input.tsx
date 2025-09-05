@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input } from './input';
+import { Input } from './inputt';
 import { Label } from './label';
 import { cn } from '@/lib/utils';
 
