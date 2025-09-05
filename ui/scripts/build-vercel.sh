@@ -3,7 +3,7 @@
 print_message() {
     local script_name=$1
     local message=$2
-    echo "\033[34m#task - (${script_name}): ${message}\033[0m"
+    echo -e "\033[34m#task - (${script_name}): ${message}\033[0m"
 }
 
 # Function to perform build tasks

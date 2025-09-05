@@ -3,7 +3,7 @@
 function print() {
   local message=$1
 
-  echo "\033[34minstall-vercel.sh\033[0m" "${message}"
+  echo -e "\033[34minstall-vercel.sh\033[0m" "${message}"
 }
 
 # Function to pull public submodule
@@ -60,7 +60,7 @@ cd ..
 handle_public_submodule "." "drift-common"
 
 # Install common-ts
-bun_install_and_link "./drift-common/common-ts"
+bun_install_and_link "./drift-common/common-ts" "" "true"
 
 # Install UI
 bun_install_and_link "./ui" "@drift/common" ""
