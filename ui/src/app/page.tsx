@@ -48,8 +48,7 @@ export default function Home() {
           <h1 className="text-4xl font-bold text-white">Drift UI Template</h1>
         </div>
         <p className="text-xl text-gray-300 mb-8">
-          Beautiful Solana perpetuals trading interface built with Drift
-          Protocol
+          Solana perpetuals trading interface built with Drift Protocol
         </p>
 
         {/* Wallet Status */}

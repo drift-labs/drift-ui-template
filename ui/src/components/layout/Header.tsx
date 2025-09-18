@@ -7,6 +7,14 @@ import WalletButton from "../wallet/WalletButton";
 import { UserAccountSelector } from "../user/UserAccountSelector";
 import { Activity, Menu, X } from "lucide-react";
 import { clsx } from "clsx";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
+import { DriftEnvironment, useDriftStore } from "@/stores/DriftStore";
 
 const navigation = [
   { name: "Home", href: "/" },
@@ -16,9 +24,16 @@ const navigation = [
   { name: "Data", href: "/data" },
 ];
 
+const ENVIRONMENT_OPTIONS: { value: DriftEnvironment; label: string }[] = [
+  { value: "devnet", label: "Devnet" },
+  { value: "mainnet-beta", label: "Mainnet" },
+];
+
 const Header: React.FC = () => {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const environment = useDriftStore((s) => s.environment);
+  const setEnvironment = useDriftStore((s) => s.setEnvironment);
 
   return (
     <header className="border-b border-gray-700 bg-gray-900/80 backdrop-blur-sm sticky top-0 z-50">
@@ -55,12 +70,48 @@ const Header: React.FC = () => {
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center gap-3">
+            <Select
+              value={environment}
+              onValueChange={(value) =>
+                setEnvironment(value as DriftEnvironment)
+              }
+            >
+              <SelectTrigger className="border-gray-700 bg-gray-800/70 text-gray-200">
+                <SelectValue aria-label={environment} placeholder="Select" />
+              </SelectTrigger>
+              <SelectContent className="border-gray-700 bg-gray-900 text-gray-100">
+                {ENVIRONMENT_OPTIONS.map((option) => (
+                  <SelectItem key={option.value} value={option.value}>
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
             <UserAccountSelector />
             <WalletButton />
           </div>
 
           {/* Mobile menu button */}
           <div className="md:hidden flex items-center gap-2">
+            <div className="scale-75">
+              <Select
+                value={environment}
+                onValueChange={(value) =>
+                  setEnvironment(value as DriftEnvironment)
+                }
+              >
+                <SelectTrigger className="border-gray-700 bg-gray-800/70 text-gray-200">
+                  <SelectValue aria-label={environment} placeholder="Select" />
+                </SelectTrigger>
+                <SelectContent className="border-gray-700 bg-gray-900 text-gray-100">
+                  {ENVIRONMENT_OPTIONS.map((option) => (
+                    <SelectItem key={option.value} value={option.value}>
+                      {option.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
             <div className="scale-75">
               <UserAccountSelector />
             </div>
