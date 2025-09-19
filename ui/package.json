@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@drift-labs/common": "^1.0.0",
+    "@drift-labs/common": "file:../drift-common/common-ts",
     "@drift-labs/sdk": "^2.136.0",
     "@radix-ui/react-dropdown-menu": "^2.1.16",
     "@radix-ui/react-label": "^2.1.7",
