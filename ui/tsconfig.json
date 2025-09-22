@@ -21,8 +21,7 @@
     ],
     "paths": {
       "@/*": ["./src/*"],
-      "@drift-labs/sdk": ["../drift-common/protocol/sdk"],
-      "@drift/common": ["../drift-common/common-ts"]
+      "@drift-labs/sdk": ["../drift-common/protocol/sdk"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
