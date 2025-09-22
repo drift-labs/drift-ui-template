@@ -46,8 +46,6 @@ Navigate to the UI directory and install dependencies:
 
 ```bash
 cd ui
-npm install
-# or
 bun install
 ```
 
@@ -64,8 +62,6 @@ NEXT_PUBLIC_SOLANA_DEVNET_RPC_ENDPOINT=your_devnet_rpc_url
 
 ```bash
 cd ui
-npm run dev
-# or
 bun dev
 ```
 
@@ -164,10 +160,10 @@ UI components are located in `ui/src/components/ui/` and built with Radix UI pri
 ### Available Scripts
 
 ```bash
-npm run dev       # Start development server with Turbopack
-npm run build     # Build for production
-npm run start     # Start production server
-npm run lint      # Run ESLint
+bun run dev       # Start development server with Turbopack
+bun run build     # Build for production
+bun run start     # Start production server
+bun run lint      # Run ESLint
 ```
 
 ### Project Structure
