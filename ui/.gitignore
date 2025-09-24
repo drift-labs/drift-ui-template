@@ -12,6 +12,7 @@
 
 # testing
 /coverage
+/test-results
 
 # next.js
 /.next/
@@ -19,10 +20,12 @@
 
 # production
 /build
+/.idea/
 
 # misc
 .DS_Store
 *.pem
+
 
 # debug
 npm-debug.log*
