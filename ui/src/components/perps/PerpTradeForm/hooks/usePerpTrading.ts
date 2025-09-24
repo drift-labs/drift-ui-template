@@ -14,7 +14,6 @@ import { useDriftStore } from "@/stores/DriftStore";
 import { useUserAccountDataStore } from "@/stores/UserAccountDataStore";
 import { ENUM_UTILS, PerpOrderParams, GeoBlockError } from "@drift-labs/common";
 import { toast } from "sonner";
-import { SwiftOrderResult } from "@drift-labs/common";
 import { TransactionSignature } from "@solana/web3.js";
 
 export type PerpOrderType =
@@ -169,8 +168,9 @@ export const usePerpTrading = ({
       let orderConfig: PerpOrderParams["orderConfig"];
 
       switch (orderType) {
-        case "market":
+        case "market": {
           isUsingSwift = isSwiftClientHealthy && useSwift;
+          let toastId = "";
           orderConfig = {
             orderType: "market",
             disableSwift: !isUsingSwift,
@@ -182,13 +182,47 @@ export const usePerpTrading = ({
                 ? BigNum.fromPrint(stopLossPrice, PRICE_PRECISION_EXP)
                 : undefined,
             },
+            swiftOptions: {
+              callbacks: {
+                onOrderParamsMessagePrepped: () => {
+                  toastId = toast.loading("Preparing Order") as string;
+                },
+                onSigningSuccess: () => {
+                  toast.success("Order Signed", {
+                    id: toastId,
+                  });
+                },
+                onSent: () => {
+                  toast.success("Order Sent", {
+                    id: toastId,
+                  });
+                },
+                onConfirmed: () => {
+                  toast.success("Order Confirmed", {
+                    id: toastId,
+                  });
+                },
+                onExpired: () => {
+                  toast.error("Order Expired", {
+                    id: toastId,
+                  });
+                },
+                onErrored: () => {
+                  toast.error("Order Errored", {
+                    id: toastId,
+                  });
+                },
+              },
+            },
           };
           break;
-        case "limit":
+        }
+        case "limit": {
           const limitPriceBigNum = BigNum.fromPrint(
             limitPrice,
             QUOTE_PRECISION_EXP,
           );
+          let toastId = "";
           isUsingSwift = isSwiftClientHealthy && useSwift;
           orderConfig = {
             orderType: "limit",
@@ -202,8 +236,41 @@ export const usePerpTrading = ({
                 ? BigNum.fromPrint(stopLossPrice, PRICE_PRECISION_EXP)
                 : undefined,
             },
+            swiftOptions: {
+              callbacks: {
+                onOrderParamsMessagePrepped: () => {
+                  toastId = toast.loading("Preparing Order") as string;
+                },
+                onSigningSuccess: () => {
+                  toast.success("Order Signed", {
+                    id: toastId,
+                  });
+                },
+                onSent: () => {
+                  toast.success("Order Sent", {
+                    id: toastId,
+                  });
+                },
+                onConfirmed: () => {
+                  toast.success("Order Confirmed", {
+                    id: toastId,
+                  });
+                },
+                onExpired: () => {
+                  toast.error("Order Expired", {
+                    id: toastId,
+                  });
+                },
+                onErrored: () => {
+                  toast.error("Order Errored", {
+                    id: toastId,
+                  });
+                },
+              },
+            },
           };
           break;
+        }
         case "takeProfit":
         case "stopLoss":
           const triggerPriceBigNum = BigNum.fromPrint(
@@ -251,39 +318,7 @@ export const usePerpTrading = ({
         : "SHORT";
       const successMessage = `${orderType.toUpperCase()} ${orderSide} order placed successfully!`;
 
-      if (isUsingSwift) {
-        const swiftResult = result as SwiftOrderResult;
-        const swiftOrderObservable = swiftResult.swiftOrderObservable;
-
-        let sentToastId: string | number | undefined;
-
-        swiftOrderObservable.subscribe({
-          next: (event) => {
-            if (event.type === "sent") {
-              sentToastId = toast.success("Order Sent", {
-                duration: 4000,
-              });
-            } else if (event.type === "confirmed") {
-              toast.success("Order Confirmed", {
-                duration: 4000,
-                id: sentToastId,
-              });
-            } else if (event.type === "errored") {
-              toast.error("Order Failed", {
-                description: event.message || "Order failed. Please try again.",
-                duration: 4000,
-                id: sentToastId,
-              });
-            } else if (event.type === "expired") {
-              toast.error("Order Expired", {
-                description: "Order expired. Please try again.",
-                duration: 4000,
-                id: sentToastId,
-              });
-            }
-          },
-        });
-      } else {
+      if (!isUsingSwift) {
         const _txSig = result as TransactionSignature;
 
         toast.success("Order Placed", {
