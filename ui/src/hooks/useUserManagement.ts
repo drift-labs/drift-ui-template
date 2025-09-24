@@ -87,7 +87,6 @@ export const useUserManagement = () => {
       newAccountName: "Main Account",
       poolId: 0,
       subAccountId: 0,
-      referrerName: "dev2",
     });
   };
 
