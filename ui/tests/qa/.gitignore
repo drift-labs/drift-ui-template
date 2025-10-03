@@ -1,0 +1,11 @@
+test-results/
+node_modules/
+playwright-report/
+yarn-error.log
+test-results*.json
+testlog.json
+.DS_Store
+blob-report/
+.yarn/
+temp/
+temp1/
