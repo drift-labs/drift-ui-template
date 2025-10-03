@@ -12,6 +12,7 @@
 
 # testing
 /coverage
+/test-results
 
 # next.js
 /.next/
@@ -19,10 +20,13 @@
 
 # production
 /build
+/.idea/
 
 # misc
 .DS_Store
+*/.DS_Store
 *.pem
+
 
 # debug
 npm-debug.log*
@@ -39,3 +43,15 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Playwright
+node_modules/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
+.cache-synpress
+package-lock.json
+yarn.lock
+reports/
+*.log
