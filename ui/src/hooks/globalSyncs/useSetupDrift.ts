@@ -2,7 +2,7 @@ import { DriftEnvironment, useDriftStore } from "@/stores/DriftStore";
 import { useMarkPriceStore } from "@/stores/MarkPriceStore";
 import { useOraclePriceStore } from "@/stores/OraclePriceStore";
 import { useUserAccountDataStore } from "@/stores/UserAccountDataStore";
-import { IWallet, MarketType } from "@drift-labs/sdk";
+import { IWallet, IWalletV2, MarketType } from "@drift-labs/sdk";
 import {
   AuthorityDrift,
   AuthorityDriftConfig,
@@ -80,8 +80,8 @@ export const useSetupDrift = () => {
       let authorityDriftInstance: AuthorityDrift | undefined;
 
       const walletToUse = isConnected
-        ? (wallet as IWallet)
-        : COMMON_UI_UTILS.createPlaceholderIWallet();
+        ? (wallet as IWalletV2)
+        : COMMON_UI_UTILS.createPlaceholderIWallet() as IWalletV2;
 
       const setup = async () => {
         isSubscribingToDrift.current = true;
