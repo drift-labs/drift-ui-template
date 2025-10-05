@@ -5,7 +5,7 @@
       "name": "ui",
       "dependencies": {
         "@drift-labs/common": "^1.0.11",
-        "@drift-labs/sdk": "^2.140.0",
+        "@drift-labs/sdk": "^2.141.0",
         "@radix-ui/react-dropdown-menu": "^2.1.16",
         "@radix-ui/react-label": "^2.1.7",
         "@radix-ui/react-select": "^2.2.5",
@@ -132,7 +132,7 @@
 
     "@drift-labs/common": ["@drift-labs/common@1.0.11", "", { "dependencies": { "@slack/web-api": "6.4.0", "@solana/spl-token": "0.3.8", "@solana/web3.js": "1.98.0", "bcryptjs-react": "2.4.6", "cerializr": "3.1.4", "dotenv": "^17.2.2", "immer": "10.0.3", "ioredis": "5.4.1", "isomorphic-ws": "^5.0.0", "localstorage-memory": "1.0.3", "rxjs": "7.8.2", "tiny-invariant": "1.3.1", "tweetnacl": "1.0.3", "winston": "3.13.0", "winston-slack-webhook-transport": "2.3.5" }, "peerDependencies": { "@drift-labs/sdk": "^2.136.0" } }, "sha512-yaF2gVJSLPvQsfnp82ijpeL+W7fDDjEgOgGqzZqvoqBACjD/zgfqUa4oeWCgU90Lutt/eOvRCD0cHVsMv8Buaw=="],
 
-    "@drift-labs/sdk": ["@drift-labs/sdk@2.140.0", "", { "dependencies": { "@coral-xyz/anchor": "0.29.0", "@coral-xyz/anchor-30": "npm:@coral-xyz/anchor@0.30.1", "@ellipsis-labs/phoenix-sdk": "1.4.5", "@grpc/grpc-js": "1.12.6", "@openbook-dex/openbook-v2": "0.2.10", "@project-serum/serum": "0.13.65", "@pythnetwork/client": "2.5.3", "@pythnetwork/price-service-sdk": "1.7.1", "@pythnetwork/pyth-solana-receiver": "0.7.0", "@solana/spl-token": "0.4.13", "@solana/web3.js": "1.98.0", "@switchboard-xyz/common": "3.0.14", "@switchboard-xyz/on-demand": "2.4.1", "@triton-one/yellowstone-grpc": "1.3.0", "anchor-bankrun": "0.3.0", "gill": "^0.10.2", "helius-laserstream": "0.1.8", "nanoid": "3.3.4", "node-cache": "5.1.2", "rpc-websockets": "7.5.1", "solana-bankrun": "0.3.1", "strict-event-emitter-types": "2.0.0", "tweetnacl": "1.0.3", "tweetnacl-util": "0.15.1", "uuid": "8.3.2", "yargs": "17.7.2", "zod": "4.0.17", "zstddec": "0.1.0" } }, "sha512-a+0opvnFAy6dh8pmQbXxFEL6iDtcBysecLY72t5TwsHK+aUOfYhoJkL7PJXQKe1Cko3uxCENRq+ly2TOgCOrEQ=="],
+    "@drift-labs/sdk": ["@drift-labs/sdk@2.141.0", "", { "dependencies": { "@coral-xyz/anchor": "0.29.0", "@coral-xyz/anchor-30": "npm:@coral-xyz/anchor@0.30.1", "@ellipsis-labs/phoenix-sdk": "1.4.5", "@grpc/grpc-js": "1.12.6", "@openbook-dex/openbook-v2": "0.2.10", "@project-serum/serum": "0.13.65", "@pythnetwork/client": "2.5.3", "@pythnetwork/price-service-sdk": "1.7.1", "@pythnetwork/pyth-solana-receiver": "0.7.0", "@solana/spl-token": "0.4.13", "@solana/web3.js": "1.98.0", "@switchboard-xyz/common": "3.0.14", "@switchboard-xyz/on-demand": "2.4.1", "@triton-one/yellowstone-grpc": "1.3.0", "anchor-bankrun": "0.3.0", "gill": "^0.10.2", "helius-laserstream": "0.1.8", "nanoid": "3.3.4", "node-cache": "5.1.2", "rpc-websockets": "7.5.1", "solana-bankrun": "0.3.1", "strict-event-emitter-types": "2.0.0", "tweetnacl": "1.0.3", "tweetnacl-util": "0.15.1", "uuid": "8.3.2", "yargs": "17.7.2", "zod": "4.0.17", "zstddec": "0.1.0" } }, "sha512-M1bw63FdEJb/fhxmY382xiEHa+kvVQqwNlT+bY7BBOCyGbAbnExhZL8MBAZDb+B3ucjnpdGihOdDzFLrRuSM4Q=="],
 
     "@ellipsis-labs/phoenix-sdk": ["@ellipsis-labs/phoenix-sdk@1.4.5", "", { "dependencies": { "@metaplex-foundation/beet": "^0.7.1", "@metaplex-foundation/rustbin": "^0.3.1", "@metaplex-foundation/solita": "^0.12.2", "@solana/spl-token": "^0.3.7", "@types/node": "^18.11.13", "bn.js": "^5.2.1", "borsh": "^0.7.0", "bs58": "^5.0.0" } }, "sha512-vEYgMXuV5/mpnpEi+VK4HO8f6SheHtVLdHHlULBiDN1eECYmL67gq+/cRV7Ar6jAQ7rJZL7xBxhbUW5kugMl6A=="],
 
