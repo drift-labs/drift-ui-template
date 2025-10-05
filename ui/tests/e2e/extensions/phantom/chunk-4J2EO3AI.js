@@ -1,0 +1,2 @@
+import{_ as s,ba as h,od as l}from"./chunk-PJ6PRBE2.js";import{h as e,n as t}from"./chunk-SVG5OEFH.js";e();t();e();t();e();t();async function p(o){let r=await s.api().headers({Accept:"application/json"}).get(`/alert/v1?locale=${o}`);if(!h(r))throw new Error("Failed to retrieve Solana network health");return r.data}function i(o,r){return l({queryKey:["solana","health",{locale:o}],refetchInterval:60*2500,enabled:r,async queryFn(){return await p(o)}})}function u(o,r){let{data:a}=i(o,r);return r?a:void 0}e();t();export{u as a};
+//# sourceMappingURL=chunk-4J2EO3AI.js.map

@@ -1,0 +1,4 @@
+import{r as u}from"./chunk-N6BAVOMX.js";import{b as m}from"./chunk-KHFCJUHU.js";import{m as T}from"./chunk-FABKKW5E.js";import{X as c,c as A,ya as l}from"./chunk-UTOBJRXZ.js";import{f as P,h as n,n as a}from"./chunk-SVG5OEFH.js";n();a();var o=P(A());var S=3e3,k=T.div`
+  cursor: pointer;
+`,v=({copyString:C,children:d,alignment:f})=>{let{t:p}=c(),[t,y,e]=m(C),[b,r]=(0,o.useState)(!1),s=p(t?"pastParticipleCopied":"accountHeaderCopyToClipboard"),g=t?l.colors.legacy.spotBase:l.colors.legacy.black,h=()=>r(!0),E=()=>r(!1),L=()=>{y(),e(!0)};return(0,o.useEffect)(()=>{let i;return t&&(i=setTimeout(()=>{e(!1)},S)),()=>{i&&clearTimeout(i)}},[t,e]),o.default.createElement(u,{label:s,ariaLabel:s,color:g,isVisible:b,triggerParams:{onMouseEnter:h,onMouseLeave:E},alignment:f},o.default.createElement(k,{onClick:L},d))};export{v as a};
+//# sourceMappingURL=chunk-O47TP2CJ.js.map
