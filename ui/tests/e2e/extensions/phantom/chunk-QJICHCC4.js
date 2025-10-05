@@ -1,0 +1,30 @@
+import{a as u,b as W,c as w}from"./chunk-62R3RHBC.js";import{a as M}from"./chunk-6VBZ34UF.js";import{I as E,d as z,o as J,u as _}from"./chunk-ZPSIMYUC.js";import{o as h}from"./chunk-N6BAVOMX.js";import{a as H}from"./chunk-GDHNPAWS.js";import{B,Ca as V}from"./chunk-Q2MU5Q7Q.js";import{a as K}from"./chunk-PQHYTRV5.js";import{cb as q,db as k,m as i}from"./chunk-FABKKW5E.js";import{b as O}from"./chunk-JSLOSOZX.js";import{y as D}from"./chunk-VOCOWPRG.js";import{Ba as I,Ca as T,Da as c,X as P,ac as N,c as S,cb as U,wa as a,ya as f}from"./chunk-UTOBJRXZ.js";import{f as C,h as g,n as x}from"./chunk-SVG5OEFH.js";g();x();var o=C(S());g();x();var l=C(S());var po=i.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 83px;
+  padding: 16px;
+`,fo=i.div`
+  margin-left: 12px;
+  width: 100%;
+`,uo=i(k).attrs({size:14,weight:400,color:f.colors.legacy.textDiminished,textAlign:"left"})``,wo=i.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`,go=i(k).attrs({size:28,lineHeight:32,weight:600,color:f.colors.legacy.textBase,textAlign:"left"})`
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+`,y=({title:e,network:r,tokenType:s,symbol:m,logoUri:p,tokenAddress:b,amount:n,amountUsd:t})=>l.default.createElement(po,null,l.default.createElement(_,{image:{type:"fungible",src:p,fallback:m||b},size:44,tokenType:s,chainMeta:r}),l.default.createElement(fo,null,l.default.createElement(wo,null,l.default.createElement(uo,null,e),l.default.createElement(z,{value:t,font:"caption",color:"textDiminished"})),l.default.createElement(go,null,n)));var d={screen:a({overflow:"auto"}),body:a({display:"flex",flexDirection:"column",justifyContent:"space-between"}),content:a({display:"flex",flexDirection:"column",width:"100%"}),assets:a({backgroundColor:"elementBase",borderRadius:6,width:"100%"}),line:a({backgroundColor:"areaBase",width:"100%",height:1}),button:a({width:"100%",height:48})},L=i(q).attrs({color:K.grayLight,size:14})`
+  text-align: left;
+  line-height: normal;
+  max-width: 100%;
+  margin: 16px 0;
+`,xo=i.a.attrs({target:"_blank",rel:"noopener noreferrer"})`
+  color: ${e=>e.theme.purple};
+  text-decoration: none;
+  cursor: pointer;
+`,To=({isJitoSOL:e,feeFootnoteText:r,feeFootnoteDescriptionText:s,feeFootnoteTooltipText:m,showUKDisclaimer:p})=>e?o.default.createElement(L,null,o.default.createElement(O,{i18nKey:"liquidStakeReviewConversionFootnote"},"When you stake Solana tokens in exchange for JitoSOL you'll receive a slightly lesser amount of JitoSOL.",o.default.createElement(xo,{href:B},"Learn more"))):p?o.default.createElement(E,{disclaimers:[],showUKDisclaimer:!0,showPastPerformanceInline:!0,marginTop:16,onPastPerformancePress:void 0,onDisclosuresPress:void 0,onFeeDisclaimerPress:void 0}):o.default.createElement(o.default.Fragment,null,o.default.createElement(L,null,o.default.createElement(M,{tooltipAlignment:"topLeft",iconSize:12,lineHeight:17,fontWeight:400,info:o.default.createElement(W,{tooltipContent:o.default.createElement(h,null,m)}),textColor:f.colors.legacy.textDiminished},r)),o.default.createElement(L,null,s)),bo=({children:e})=>o.default.createElement(T,{direction:"row",width:"100%",gap:8,paddingRight:4},e),co=({durationUntilEpochEnds:e})=>{let{t:r}=P(),s=(0,o.useMemo)(()=>[{topLeft:{component:bo,text:o.default.createElement(o.default.Fragment,null,o.default.createElement(c,null,r("convertToPSOLDelayDisclaimer",{durationUntilEpochEnds:e}))),truncate:void 0,style:{wordWrap:"break-word",whiteSpace:"normal"},before:o.default.createElement(I.InfoCircle,{color:"white",size:18,style:{alignSelf:"flex-start",marginTop:2}})}}],[r,e]);return o.default.createElement(N,{rows:s})},Mo=o.default.memo(({process:e,headerTitle:r,onBack:s,openExternalLink:m,onPrimaryButtonPress:p,canSubmit:b,payAsset:n,receiveAsset:t,account:j,providerName:Y,apy:$,networkFee:A,isLoading:F,networkFeeErrorMsg:G,isJitoSOL:Q,strings:X,showUKDisclaimer:v,durationUntilEpochEnds:Z})=>{let{accountLabelText:R,providerLabelText:oo,apyLabelText:eo,apyLabelTextTooltip:to,networkFeeLabelText:no,primaryButtonText:io,feeFootnoteText:ro,feeFootnoteDescriptionText:lo,feeFootnoteTooltipText:so}=X,ao=[t?o.default.createElement(u,{key:"account-row",label:R},o.default.createElement(w,null,o.default.createElement(c,{font:"body",children:D(j,4)}))):null,o.default.createElement(u,{key:"provider-row",label:oo},o.default.createElement(w,null,Y)),o.default.createElement(u,{key:"apy-row",label:eo,tooltipContent:o.default.createElement(h,null,to)},o.default.createElement(w,null,$)),o.default.createElement(u,{key:"network-fee-row",label:no,isLoading:F,error:G},o.default.createElement(w,null,A))];return o.default.createElement("div",{className:d.screen},o.default.createElement(J,{leftButton:{type:"back",onClick:s},titleSize:"regular"},r),o.default.createElement("div",{className:d.body},m&&v?o.default.createElement(T,{marginBottom:"base"},o.default.createElement(V,{paddingTop:8,navigateToExternalLink:m})):null,o.default.createElement("div",{className:d.content},o.default.createElement("div",{className:d.assets},n?o.default.createElement(y,{title:n.title,amount:n.amount+" "+n.symbol,amountUsd:n.amountUsd,logoUri:n.logoUri,symbol:n.symbol,tokenType:n.tokenType,tokenAddress:n.tokenAddress,network:n.network}):null,o.default.createElement("div",{className:d.line}),t?o.default.createElement(y,{title:t.title,amount:t.amount+" "+t.symbol,amountUsd:t.amountUsd,logoUri:t.logoUri,symbol:t.symbol,tokenType:t.tokenType,tokenAddress:t.tokenAddress,network:t.network}):null),o.default.createElement(T,{marginY:"base",borderRadius:8,gap:1,overflow:"hidden"},ao),e==="mint"?o.default.createElement(To,{isJitoSOL:Q,feeFootnoteText:ro,feeFootnoteDescriptionText:lo,feeFootnoteTooltipText:so,showUKDisclaimer:v}):e==="convertDelayed"?o.default.createElement(co,{durationUntilEpochEnds:Z}):null),o.default.createElement(H,null,o.default.createElement(U,{className:d.button,background:"spot",disabled:!b||F,onClick:p},io))))});export{Mo as a};
+//# sourceMappingURL=chunk-QJICHCC4.js.map
