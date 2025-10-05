@@ -3,7 +3,7 @@
 Usage Instructions
 
 ```sh
-cd src/tests/e2e
+cd src/tests/e2e (If not the current directory)
 
 bun install
 

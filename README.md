@@ -33,6 +33,7 @@ A modern, responsive UI template for integrating with the Drift protocol. This t
 
 ## 🛠️ Installation
 
+### 1. Clone the repository
 ```bash
 git clone <your-repository-url>
 cd drift-ui-template
@@ -166,7 +167,7 @@ bun run lint      # Run ESLint
 
 ### Project Structure
 
-```ini
+```
 ui/
 ├── src/
 │   ├── app/          # Next.js pages and layouts
