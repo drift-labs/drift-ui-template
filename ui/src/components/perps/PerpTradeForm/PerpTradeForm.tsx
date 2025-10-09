@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { PerpMarketConfig, PositionDirection } from "@drift-labs/sdk";
+import { PerpMarketConfig, PositionDirection, BigNum, BASE_PRECISION_EXP, PRICE_PRECISION_EXP, ZERO } from "@drift-labs/sdk";
 import { Card, CardContent, CardHeader, CardTitle } from "../../ui/card";
 import { Button } from "../../ui/button";
 import { FormInput } from "../../ui/form-input";
@@ -12,7 +12,9 @@ import {
   AssetSizeType,
   PerpOrderType,
 } from "./hooks/usePerpTrading";
-import { ENUM_UTILS } from "@drift-labs/common";
+import { ENUM_UTILS, MarketId } from "@drift-labs/common";
+import { useMarkPriceStore } from "@/stores/MarkPriceStore";
+import { useOraclePriceStore } from "@/stores/OraclePriceStore";
 
 interface PerpTradeFormProps {
   perpMarketConfigs: PerpMarketConfig[];
@@ -38,6 +40,7 @@ export function PerpTradeForm({
     useSwift,
     isLoading,
     selectedMarketConfig,
+    minOrderSize,
     setOrderType,
     setDirection,
     setSizeType,
@@ -53,6 +56,13 @@ export function PerpTradeForm({
     handleSubmit,
     canSubmit,
   } = usePerpTrading({ perpMarketConfigs, selectedMarketIndex });
+
+  const selectedMarketId = MarketId.createPerpMarket(selectedMarketIndex);
+  const markPrice = useMarkPriceStore((s) => s.lookup[selectedMarketId.key]?.markPrice ?? ZERO);
+  const oraclePrice = useOraclePriceStore((s) => s.lookup[selectedMarketId.key]?.price ?? ZERO);
+  
+  // Use mark price if available, otherwise fallback to oracle price
+  const currentPrice = !markPrice.eq(ZERO) ? markPrice : oraclePrice;
 
   const isLongSide = ENUM_UTILS.match(direction, PositionDirection.LONG);
 
@@ -173,6 +183,26 @@ export function PerpTradeForm({
               required
             />
           </div>
+
+          {/* Minimum Order Size Info */}
+          {selectedMarketConfig && !minOrderSize.eq(ZERO) && (
+            <div className="text-sm text-gray-400">
+              {sizeType === "base" ? (
+                <>Minimum order size: {BigNum.from(minOrderSize, BASE_PRECISION_EXP).prettyPrint()} {selectedMarketConfig.baseAssetSymbol}</>
+              ) : !currentPrice.eq(ZERO) ? (
+                <>
+                  Minimum order size: {BigNum.from(minOrderSize, BASE_PRECISION_EXP).prettyPrint()} {selectedMarketConfig.baseAssetSymbol} 
+                  {" (≈$"}
+                  {BigNum.from(minOrderSize, BASE_PRECISION_EXP)
+                    .mul(BigNum.from(currentPrice, PRICE_PRECISION_EXP))
+                    .prettyPrint()}
+                  {")"}
+                </>
+              ) : (
+                <>Minimum order size: {BigNum.from(minOrderSize, BASE_PRECISION_EXP).prettyPrint()} {selectedMarketConfig.baseAssetSymbol} (price loading...)</>
+              )}
+            </div>
+          )}
 
           {/* Price Inputs Based on Order Type */}
           <div className="grid md:grid-cols-2 gap-4">
