@@ -9,12 +9,17 @@ import {
   PostOnlyParams,
   PRICE_PRECISION_EXP,
   QUOTE_PRECISION_EXP,
+  ZERO,
+  BN,
 } from "@drift-labs/sdk";
 import { useDriftStore } from "@/stores/DriftStore";
 import { useUserAccountDataStore } from "@/stores/UserAccountDataStore";
-import { ENUM_UTILS, PerpOrderParams, GeoBlockError } from "@drift-labs/common";
+import { useMarkPriceStore } from "@/stores/MarkPriceStore";
+import { useOraclePriceStore } from "@/stores/OraclePriceStore";
+import { ENUM_UTILS, PerpOrderParams, GeoBlockError, MarketId } from "@drift-labs/common";
 import { toast } from "sonner";
 import { TransactionSignature } from "@solana/web3.js";
+import { useGetPerpMarketMinOrderSize } from "@/hooks/markets/useGetPerpMarketMinOrderSize";
 
 export type PerpOrderType =
   | "market"
@@ -73,8 +78,27 @@ export const usePerpTrading = ({
     (config) => config.marketIndex === selectedMarketIndex,
   );
 
+  const minOrderSize = useGetPerpMarketMinOrderSize(selectedMarketIndex);
+  
+  const selectedMarketId = MarketId.createPerpMarket(selectedMarketIndex);
+  const markPrice = useMarkPriceStore((s) => s.lookup[selectedMarketId.key]?.markPrice ?? ZERO);
+  const oraclePrice = useOraclePriceStore((s) => s.lookup[selectedMarketId.key]?.price ?? ZERO);
+  
+  // Use mark price if available, otherwise fallback to oracle price
+  const currentPrice = !markPrice.eq(ZERO) ? markPrice : oraclePrice;
+
   const validateForm = (): { isValid: boolean; errorMessage?: string } => {
+    console.log("Validation started:", {
+      selectedMarketConfig: !!selectedMarketConfig,
+      size,
+      sizeType,
+      orderType,
+      minOrderSize: minOrderSize.toString(),
+      currentPrice: currentPrice.toString()
+    });
+
     if (!selectedMarketConfig) {
+      console.log("Validation failed: No market config");
       return {
         isValid: false,
         errorMessage: "Please select a valid market",
@@ -82,10 +106,77 @@ export const usePerpTrading = ({
     }
 
     if (!size) {
+      console.log("Validation failed: No size");
       return {
         isValid: false,
         errorMessage: "Please enter a size",
       };
+    }
+
+    // Validate minimum order size
+    if (selectedMarketConfig && !minOrderSize.eq(ZERO)) {
+      try {
+        const sizePrecisionExp = sizeType === "base" ? BASE_PRECISION_EXP : QUOTE_PRECISION_EXP;
+        const sizeBigNum = BigNum.fromPrint(size, sizePrecisionExp);
+        
+        // For base asset type, directly compare with minimum order size
+        if (sizeType === "base") {
+          if (sizeBigNum.val.lt(minOrderSize)) {
+            const minOrderSizeFormatted = BigNum.from(minOrderSize, BASE_PRECISION_EXP).prettyPrint();
+            return {
+              isValid: false,
+              errorMessage: `Order size must be at least ${minOrderSizeFormatted} ${selectedMarketConfig.baseAssetSymbol}`,
+            };
+          }
+        } else if (sizeType === "quote") {
+          // For quote asset type, convert notional amount to base asset amount using current price
+          if (currentPrice.eq(ZERO)) {
+            return {
+              isValid: false,
+              errorMessage: "Price data not available. Please try again in a moment.",
+            };
+          }
+          
+          // Quote amount / Current price = Base amount
+          // To maintain precision, we'll use BN math directly
+          const currentPriceBigNum = BigNum.from(currentPrice, PRICE_PRECISION_EXP);
+          
+          // Convert both to their raw BN values and do the division with proper scaling
+          const sizeRaw = sizeBigNum.val; // This is in QUOTE_PRECISION (1e6)
+          const priceRaw = currentPriceBigNum.val; // This is in PRICE_PRECISION (1e6)
+          
+          // sizeRaw (1e6) / priceRaw (1e6) * 1e9 = result in BASE_PRECISION (1e9)
+          const basePrecisionMultiplier = new BN(10).pow(new BN(BASE_PRECISION_EXP));
+          const baseEquivalentRaw = sizeRaw.mul(basePrecisionMultiplier).div(priceRaw);
+          const baseEquivalent = BigNum.from(baseEquivalentRaw, BASE_PRECISION_EXP);
+          
+          // Debug logging
+          console.log("Quote validation debug (improved):", {
+            size,
+            sizeUSDC: sizeBigNum.prettyPrint(),
+            sizeBigNumVal: sizeBigNum.val.toString(),
+            currentPrice: currentPriceBigNum.prettyPrint(),
+            currentPriceVal: currentPriceBigNum.val.toString(),
+            baseEquivalent: baseEquivalent.prettyPrint(),
+            baseEquivalentVal: baseEquivalent.val.toString(),
+            baseEquivalentRaw: baseEquivalentRaw.toString(),
+            minOrderSize: BigNum.from(minOrderSize, BASE_PRECISION_EXP).prettyPrint(),
+            minOrderSizeVal: minOrderSize.toString(),
+            isValid: !baseEquivalent.val.lt(minOrderSize)
+          });
+          
+          if (baseEquivalent.val.lt(minOrderSize)) {
+            const minOrderSizeFormatted = BigNum.from(minOrderSize, BASE_PRECISION_EXP).prettyPrint();
+            const minNotionalValue = BigNum.from(minOrderSize, BASE_PRECISION_EXP).mul(currentPriceBigNum);
+            return {
+              isValid: false,
+              errorMessage: `Order size must be at least ${minOrderSizeFormatted} ${selectedMarketConfig.baseAssetSymbol} (≈$${minNotionalValue.prettyPrint()})`,
+            };
+          }
+        }
+      } catch (_error) {
+        // If size parsing fails, let it be caught by other validations
+      }
     }
 
     if (orderType === "limit" && !limitPrice) {
@@ -134,6 +225,7 @@ export const usePerpTrading = ({
       };
     }
 
+    console.log("Validation completed successfully");
     return { isValid: true };
   };
 
@@ -376,6 +468,7 @@ export const usePerpTrading = ({
     useSwift,
     isLoading,
     selectedMarketConfig,
+    minOrderSize,
 
     // Actions
     setOrderType,
