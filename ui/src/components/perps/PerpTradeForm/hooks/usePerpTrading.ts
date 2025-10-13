@@ -20,6 +20,7 @@ import { ENUM_UTILS, PerpOrderParams, GeoBlockError, MarketId } from "@drift-lab
 import { toast } from "sonner";
 import { TransactionSignature } from "@solana/web3.js";
 import { useGetPerpMarketMinOrderSize } from "@/hooks/markets/useGetPerpMarketMinOrderSize";
+import { useBuilderCodeUtils, BuilderCodeOptions } from "@/lib/builderCodes";
 
 export type PerpOrderType =
   | "market"
@@ -43,6 +44,14 @@ export const usePerpTrading = ({
   const activeSubAccountId = useUserAccountDataStore(
     (s) => s.activeSubAccountId,
   );
+
+  // Builder code utilities
+  const { 
+    canApplyBuilderCodes, 
+    getBuilderCodeOptionsForUser, 
+    calculateFeeInfo,
+    isOnboardingComplete 
+  } = useBuilderCodeUtils();
 
   const [orderType, setOrderType] = useState<PerpOrderType>("market");
   const [direction, setDirection] = useState<PositionDirection>(
@@ -88,25 +97,14 @@ export const usePerpTrading = ({
   const currentPrice = !markPrice.eq(ZERO) ? markPrice : oraclePrice;
 
   const validateForm = (): { isValid: boolean; errorMessage?: string } => {
-    console.log("Validation started:", {
-      selectedMarketConfig: !!selectedMarketConfig,
-      size,
-      sizeType,
-      orderType,
-      minOrderSize: minOrderSize.toString(),
-      currentPrice: currentPrice.toString()
-    });
-
     if (!selectedMarketConfig) {
-      console.log("Validation failed: No market config");
       return {
         isValid: false,
         errorMessage: "Please select a valid market",
       };
     }
 
-    if (!size) {
-      console.log("Validation failed: No size");
+    if (!size || size.trim() === '') {
       return {
         isValid: false,
         errorMessage: "Please enter a size",
@@ -118,7 +116,6 @@ export const usePerpTrading = ({
       try {
         const sizePrecisionExp = sizeType === "base" ? BASE_PRECISION_EXP : QUOTE_PRECISION_EXP;
         const sizeBigNum = BigNum.fromPrint(size, sizePrecisionExp);
-        
         // For base asset type, directly compare with minimum order size
         if (sizeType === "base") {
           if (sizeBigNum.val.lt(minOrderSize)) {
@@ -149,21 +146,6 @@ export const usePerpTrading = ({
           const basePrecisionMultiplier = new BN(10).pow(new BN(BASE_PRECISION_EXP));
           const baseEquivalentRaw = sizeRaw.mul(basePrecisionMultiplier).div(priceRaw);
           const baseEquivalent = BigNum.from(baseEquivalentRaw, BASE_PRECISION_EXP);
-          
-          // Debug logging
-          console.log("Quote validation debug (improved):", {
-            size,
-            sizeUSDC: sizeBigNum.prettyPrint(),
-            sizeBigNumVal: sizeBigNum.val.toString(),
-            currentPrice: currentPriceBigNum.prettyPrint(),
-            currentPriceVal: currentPriceBigNum.val.toString(),
-            baseEquivalent: baseEquivalent.prettyPrint(),
-            baseEquivalentVal: baseEquivalent.val.toString(),
-            baseEquivalentRaw: baseEquivalentRaw.toString(),
-            minOrderSize: BigNum.from(minOrderSize, BASE_PRECISION_EXP).prettyPrint(),
-            minOrderSizeVal: minOrderSize.toString(),
-            isValid: !baseEquivalent.val.lt(minOrderSize)
-          });
           
           if (baseEquivalent.val.lt(minOrderSize)) {
             const minOrderSizeFormatted = BigNum.from(minOrderSize, BASE_PRECISION_EXP).prettyPrint();
@@ -224,8 +206,6 @@ export const usePerpTrading = ({
         errorMessage: "Stop loss price must be a positive number",
       };
     }
-
-    console.log("Validation completed successfully");
     return { isValid: true };
   };
 
@@ -263,6 +243,13 @@ export const usePerpTrading = ({
         case "market": {
           isUsingSwift = isSwiftClientHealthy && useSwift;
           let toastId = "";
+          
+          // Get builder code options if applicable
+          let builderCodeOptions: BuilderCodeOptions | null = null;
+          if (canApplyBuilderCodes(isUsingSwift)) {
+            builderCodeOptions = await getBuilderCodeOptionsForUser();
+          }
+          
           orderConfig = {
             orderType: "market",
             disableSwift: !isUsingSwift,
@@ -275,8 +262,16 @@ export const usePerpTrading = ({
                 : undefined,
             },
             swiftOptions: {
+              // Builder codes are added directly to swiftOptions to be included in the signed message
+              ...(builderCodeOptions && {
+                builderIdx: builderCodeOptions.builderIdx,
+                builderFeeTenthBps: builderCodeOptions.builderFeeTenthBps,
+              }),
               callbacks: {
-                onOrderParamsMessagePrepped: () => {
+                onOrderParamsMessagePrepped: (orderParamsMessage) => {
+                  console.log('📝 Order Message to be Signed (Market Order):', {
+                    orderParamsMessage,
+                  });
                   toastId = toast.loading("Preparing Order") as string;
                 },
                 onSigningSuccess: () => {
@@ -316,6 +311,13 @@ export const usePerpTrading = ({
           );
           let toastId = "";
           isUsingSwift = isSwiftClientHealthy && useSwift;
+          
+          // Get builder code options if applicable
+          let builderCodeOptions: BuilderCodeOptions | null = null;
+          if (canApplyBuilderCodes(isUsingSwift)) {
+            builderCodeOptions = await getBuilderCodeOptionsForUser();
+          }
+          
           orderConfig = {
             orderType: "limit",
             limitPrice: limitPriceBigNum,
@@ -329,8 +331,23 @@ export const usePerpTrading = ({
                 : undefined,
             },
             swiftOptions: {
+              // Builder codes are added directly to swiftOptions to be included in the signed message
+              ...(builderCodeOptions && {
+                builderIdx: builderCodeOptions.builderIdx,
+                builderFeeTenthBps: builderCodeOptions.builderFeeTenthBps,
+              }),
               callbacks: {
-                onOrderParamsMessagePrepped: () => {
+                onOrderParamsMessagePrepped: (orderMessage: unknown) => {
+                  console.log('📝 Order Message to be Signed (Limit Order):', {
+                    orderMessage,
+                    builderCodes: builderCodeOptions,
+                    timestamp: new Date().toISOString(),
+                    orderType: 'limit',
+                    size: sizeBigNum.prettyPrint(),
+                    limitPrice: limitPriceBigNum.prettyPrint(),
+                    direction: ENUM_UTILS.match(direction, PositionDirection.LONG) ? 'LONG' : 'SHORT',
+                    marketIndex: selectedMarketIndex
+                  });
                   toastId = toast.loading("Preparing Order") as string;
                 },
                 onSigningSuccess: () => {
@@ -452,6 +469,39 @@ export const usePerpTrading = ({
     setStopLossPrice("");
   };
 
+  // Calculate builder fee info for display
+  const getBuilderFeeInfo = () => {
+    if (!size || !selectedMarketConfig) return null;
+    
+    const isUsingSwiftOrder = isSwiftClientHealthy && useSwift && (orderType === "market" || orderType === "limit");
+    if (!canApplyBuilderCodes(isUsingSwiftOrder)) return null;
+
+    try {
+      const sizePrecisionExp = sizeType === "base" ? BASE_PRECISION_EXP : QUOTE_PRECISION_EXP;
+      const sizeBigNum = BigNum.fromPrint(size, sizePrecisionExp);
+      
+      let orderSizeUsd = 0;
+      if (sizeType === "quote") {
+        // Size is already in USD
+        orderSizeUsd = Number(size);
+      } else if (sizeType === "base" && !currentPrice.eq(ZERO)) {
+        // Convert base asset size to USD using current price
+        const priceBigNum = BigNum.from(currentPrice, PRICE_PRECISION_EXP);
+        const notionalValue = sizeBigNum.mul(priceBigNum);
+        orderSizeUsd = Number(notionalValue.prettyPrint());
+      }
+
+      if (orderSizeUsd > 0) {
+        const defaultFee = orderType === "market" ? 50 : 30; // 5 bps for market, 3 bps for limit
+        return calculateFeeInfo(orderSizeUsd, defaultFee);
+      }
+    } catch (error) {
+      console.warn("Error calculating builder fee info:", error);
+    }
+    
+    return null;
+  };
+
   return {
     // State
     orderType,
@@ -490,5 +540,10 @@ export const usePerpTrading = ({
     isFormValid: validateForm().isValid,
     canSubmit:
       !isLoading && perpMarketConfigs.length > 0 && validateForm().isValid,
+    
+    // Builder code information
+    builderFeeInfo: getBuilderFeeInfo(),
+    isOnboardingComplete,
+    canUseBuilderCodes: canApplyBuilderCodes(isSwiftClientHealthy && useSwift && (orderType === "market" || orderType === "limit")),
   };
 };

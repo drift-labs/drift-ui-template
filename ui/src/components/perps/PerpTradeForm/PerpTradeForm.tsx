@@ -15,6 +15,7 @@ import {
 import { ENUM_UTILS, MarketId } from "@drift-labs/common";
 import { useMarkPriceStore } from "@/stores/MarkPriceStore";
 import { useOraclePriceStore } from "@/stores/OraclePriceStore";
+import { BuilderFeeInfo, InlineBuilderFee } from "../BuilderFeeInfo";
 
 interface PerpTradeFormProps {
   perpMarketConfigs: PerpMarketConfig[];
@@ -55,6 +56,9 @@ export function PerpTradeForm({
     setUseSwift,
     handleSubmit,
     canSubmit,
+    builderFeeInfo,
+    isOnboardingComplete,
+    canUseBuilderCodes,
   } = usePerpTrading({ perpMarketConfigs, selectedMarketIndex });
 
   const selectedMarketId = MarketId.createPerpMarket(selectedMarketIndex);
@@ -70,6 +74,7 @@ export function PerpTradeForm({
     e.preventDefault();
     await handleSubmit();
   };
+
 
   if (perpMarketConfigs.length === 0) {
     return (
@@ -101,6 +106,15 @@ export function PerpTradeForm({
       </CardHeader>
       <CardContent>
         <form onSubmit={onSubmit} className="space-y-6">
+          {/* Builder Fee Information */}
+          <BuilderFeeInfo
+            feeInfo={builderFeeInfo}
+            canUseBuilderCodes={canUseBuilderCodes}
+            isOnboardingComplete={isOnboardingComplete}
+            useSwift={useSwift}
+            orderType={orderType}
+          />
+
           {/* Position Side */}
           <div className="space-y-2">
             <div className="flex bg-gray-800 rounded-lg p-1">
@@ -183,7 +197,7 @@ export function PerpTradeForm({
               required
             />
           </div>
-
+          
           {/* Minimum Order Size Info */}
           {selectedMarketConfig && !minOrderSize.eq(ZERO) && (
             <div className="text-sm text-gray-400">
@@ -394,6 +408,22 @@ export function PerpTradeForm({
                       <p className="text-orange-400">• Reduce Only</p>
                     )}
                     {postOnly && <p className="text-purple-400">• Post Only</p>}
+                    {useSwift && <p className="text-blue-400">• Using Swift</p>}
+                    
+                    {/* Builder Fee Information */}
+                    <InlineBuilderFee 
+                      feeInfo={builderFeeInfo}
+                      canUseBuilderCodes={canUseBuilderCodes}
+                    />
+                    
+                    {/* Onboarding Notice */}
+                    {useSwift && !isOnboardingComplete && (orderType === "market" || orderType === "limit") && (
+                      <div className="mt-2 pt-2 border-t border-yellow-600/30">
+                        <p className="text-yellow-400 text-sm">
+                          • Complete builder setup for optimized routing
+                        </p>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

@@ -33,3 +33,11 @@ export {
   TooltipContent,
   TooltipProvider,
 } from "./tooltip";
+export {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from "./dialog";
