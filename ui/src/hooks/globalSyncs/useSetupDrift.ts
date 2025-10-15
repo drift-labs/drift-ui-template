@@ -32,6 +32,7 @@ const DRIFT_CONFIGS: DriftConfigMap = {
       new MarketId(0, MarketType.PERP), // SOL-PERP
       new MarketId(1, MarketType.PERP), // BTC-PERP
       new MarketId(2, MarketType.PERP), // ETH-PERP
+      new MarketId(3, MarketType.PERP), // APT-PERP
     ],
   },
 };

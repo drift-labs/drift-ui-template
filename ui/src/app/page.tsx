@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { useWallet } from "@solana/wallet-adapter-react";
 import {
@@ -10,10 +10,12 @@ import {
   CardTitle,
 } from "../components/ui/card";
 import { Button } from "../components/ui/button";
+import { BuilderOnboardingDialog, BuilderOnboardingStatus } from "../components/user";
 import { User, ArrowUpDown, TrendingUp, Wallet } from "lucide-react";
 
 export default function Home() {
   const { connected, publicKey } = useWallet();
+  const [onboardingOpen, setOnboardingOpen] = useState(false);
 
   const features = [
     {
@@ -71,6 +73,11 @@ export default function Home() {
             </div>
           )}
         </div>
+
+        {/* Builder Onboarding Status */}
+        <div className="max-w-md mx-auto mb-8">
+          <BuilderOnboardingStatus onOpenDialog={() => setOnboardingOpen(true)} />
+        </div>
       </div>
 
       {/* Features Grid */}
@@ -106,6 +113,15 @@ export default function Home() {
           );
         })}
       </div>
+
+      {/* Builder Onboarding Dialog */}
+      <BuilderOnboardingDialog
+        open={onboardingOpen}
+        onOpenChange={setOnboardingOpen}
+        onComplete={() => {
+          console.log('Builder onboarding completed!');
+        }}
+      />
     </div>
   );
 }

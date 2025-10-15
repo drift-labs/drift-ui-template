@@ -1,12 +1,13 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import {
   TableRow,
   TableCell,
   Tooltip,
   TooltipContent,
   TooltipTrigger,
+  Button,
 } from "../../ui";
 import {
   ENUM_UTILS,
@@ -23,12 +24,16 @@ import {
 import { useDriftStore } from "@/stores/DriftStore";
 import { useMarkPriceStore } from "@/stores/MarkPriceStore";
 import { Info } from "lucide-react";
+import { ClosePositionDialog } from "@/components/perps/PositionsTable/ClosePositionDialog";
 
 interface PositionTableRowProps {
   position: PerpPositionInfo;
 }
 
 export function PositionTableRow({ position }: PositionTableRowProps) {
+  const [isCloseDialogOpen, setIsCloseDialogOpen] = useState(false);
+  const [selectedCloseType, setSelectedCloseType] = useState<'market' | 'limit'>('market');
+  
   const perpMarketConfigs = useDriftStore((s) => s.getPerpMarketConfigs());
   const driftClient = useDriftStore((s) => s.drift?.driftClient);
 
@@ -173,6 +178,39 @@ export function PositionTableRow({ position }: PositionTableRowProps) {
             </TooltipContent>
           </Tooltip>
         </div>
+      </TableCell>
+      <TableCell>
+        <div className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => {
+              setSelectedCloseType('market');
+              setIsCloseDialogOpen(true);
+            }}
+          >
+            Market
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => {
+              setSelectedCloseType('limit');
+              setIsCloseDialogOpen(true);
+            }}
+          >
+            Limit
+          </Button>
+        </div>
+        <ClosePositionDialog
+          open={isCloseDialogOpen}
+          onOpenChange={setIsCloseDialogOpen}
+          position={position}
+          marketConfig={marketConfig}
+          closeType={selectedCloseType}
+          markPrice={markPrice}
+          tickSizeDecimals={tickSizeDecimals}
+        />
       </TableCell>
     </TableRow>
   );

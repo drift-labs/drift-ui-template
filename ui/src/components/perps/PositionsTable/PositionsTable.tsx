@@ -88,6 +88,7 @@ export function PositionsTable() {
               <TableHead>P&L</TableHead>
               <TableHead>Liq. Price</TableHead>
               <TableHead>Pnl Breakdown</TableHead>
+              <TableHead>Close</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
