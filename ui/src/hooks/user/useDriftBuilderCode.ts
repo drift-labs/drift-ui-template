@@ -1,9 +1,12 @@
-import { PublicKey } from "@solana/web3.js";
 import { useState } from "react";
 import { useDriftStore } from "@/stores/DriftStore";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { toast } from "sonner";
 import { useSyncRevenueShareEscrow } from "../globalSyncs/useSyncRevenueShareAccts";
+import {
+  BUILDER_AUTHORITY,
+  BUILDER_FEE_TENTH_BPS,
+} from "@/constants/builderCode";
 
 export const useDriftBuilderCode = () => {
   const drift = useDriftStore((s) => s.drift);
@@ -22,16 +25,13 @@ export const useDriftBuilderCode = () => {
 
     try {
       // Get builder configuration from environment
-      const builderAuthorityStr = process.env.NEXT_PUBLIC_BUILDER_AUTHORITY;
-      const builderFeeTenthBpsStr =
-        process.env.NEXT_PUBLIC_BUILDER_FEE_TENTH_BPS;
+      const builderAuthority = BUILDER_AUTHORITY;
+      const builderFeeTenthBps = BUILDER_FEE_TENTH_BPS;
 
-      if (!builderAuthorityStr || !builderFeeTenthBpsStr) {
-        throw new Error("Builder configuration not found");
+      if (!builderAuthority) {
+        toast.error("Builder authority not found");
+        return;
       }
-
-      const builderAuthority = new PublicKey(builderAuthorityStr);
-      const builderFeeTenthBps = parseInt(builderFeeTenthBpsStr);
 
       await drift.createRevenueShareEscrow({
         numOrders: 16,
