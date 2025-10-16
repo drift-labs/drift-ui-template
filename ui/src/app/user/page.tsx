@@ -12,7 +12,8 @@ import { User, Coins, AlertCircle, CheckCircle2 } from "lucide-react";
 import { UserAccountCard } from "../../components/user/UserAccountCard";
 import { CreateUserForm } from "../../components/user/CreateUserForm";
 import { DeleteConfirmationDialog } from "../../components/user/DeleteConfirmationDialog";
-import { useUserManagement } from "../../hooks/useUserManagement";
+import { useUserManagement } from "../../hooks/user/useUserManagement";
+import { SetupBuilderCodesCard } from "@/components/user/RevenueShareCard";
 
 const WalletNotConnectedState = () => (
   <div className="container mx-auto px-4 py-8">
@@ -184,6 +185,9 @@ export default function UserPage() {
 
             {/* Connected Wallet Info */}
             <ConnectedWalletInfo publicKey={publicKey} />
+
+            {/* RevenueShareEscrow Setup for Existing Wallets */}
+            {userAccounts.length > 0 && <SetupBuilderCodesCard />}
 
             {/* Create and Deposit Form */}
             <CreateUserForm

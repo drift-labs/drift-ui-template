@@ -22,6 +22,7 @@ const navigation = [
   { name: "Spot", href: "/spot" },
   { name: "Perps", href: "/perps" },
   { name: "Data", href: "/data" },
+  { name: "Admin", href: "/admin" },
 ];
 
 const ENVIRONMENT_OPTIONS: { value: DriftEnvironment; label: string }[] = [
@@ -37,7 +38,7 @@ const Header: React.FC = () => {
 
   return (
     <header className="border-b border-gray-700 bg-gray-900/80 backdrop-blur-sm sticky top-0 z-50">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto w-full px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link
