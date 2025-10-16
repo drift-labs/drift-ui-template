@@ -15,6 +15,7 @@ import { useUserAccountDataStore } from "@/stores/UserAccountDataStore";
 import { ENUM_UTILS, PerpOrderParams, GeoBlockError } from "@drift-labs/common";
 import { toast } from "sonner";
 import { TransactionSignature } from "@solana/web3.js";
+import { BUILDER_AUTHORITY } from "@/constants/builderCode";
 
 export type PerpOrderType =
   | "market"
@@ -37,6 +38,9 @@ export const usePerpTrading = ({
   const isSwiftClientHealthy = useDriftStore((s) => s.isSwiftClientHealthy);
   const activeSubAccountId = useUserAccountDataStore(
     (s) => s.activeSubAccountId,
+  );
+  const revenueShareEscrow = useUserAccountDataStore(
+    (s) => s.revenueShareEscrow,
   );
 
   const [orderType, setOrderType] = useState<PerpOrderType>("market");
@@ -166,6 +170,23 @@ export const usePerpTrading = ({
 
       let isUsingSwift = false;
       let orderConfig: PerpOrderParams["orderConfig"];
+
+      // Get builder configuration from environment
+      let builderParams = undefined;
+
+      if (BUILDER_AUTHORITY && revenueShareEscrow) {
+        const builderIdx = revenueShareEscrow.approvedBuilders.findIndex(
+          (builder) => builder.authority.equals(BUILDER_AUTHORITY!),
+        );
+
+        if (builderIdx !== -1) {
+          builderParams = {
+            builderIdx,
+            builderFeeTenthBps:
+              revenueShareEscrow.approvedBuilders[builderIdx].maxFeeTenthBps,
+          };
+        }
+      }
 
       switch (orderType) {
         case "market": {
@@ -311,6 +332,7 @@ export const usePerpTrading = ({
         postOnly: postOnly
           ? PostOnlyParams.MUST_POST_ONLY
           : PostOnlyParams.NONE,
+        builderParams: isUsingSwift ? builderParams : undefined,
       });
 
       const orderSide = ENUM_UTILS.match(direction, PositionDirection.LONG)

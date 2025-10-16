@@ -6,6 +6,10 @@ import {
 import { produce } from "immer";
 import { create } from "zustand";
 import { useDriftStore } from "./DriftStore";
+import {
+  RevenueShareAccount,
+  RevenueShareEscrowAccount,
+} from "@drift-labs/sdk";
 
 export interface UserAccountDataStore {
   set: (x: (s: UserAccountDataStore) => void) => void;
@@ -14,6 +18,8 @@ export interface UserAccountDataStore {
   activeSubAccountId: number | undefined;
   setActiveSubAccountId: (subAccountId: number | undefined) => void;
   getCurrentAccount: () => EnhancedAccountData | undefined;
+  revenueShareEscrow: RevenueShareEscrowAccount | undefined; // user
+  revenueShareAccount: RevenueShareAccount | undefined; // builder
 }
 
 export const useUserAccountDataStore = create<UserAccountDataStore>(
@@ -22,6 +28,8 @@ export const useUserAccountDataStore = create<UserAccountDataStore>(
     get: () => get(),
     lookup: {},
     activeSubAccountId: undefined,
+    revenueShareEscrow: undefined,
+    revenueShareAccount: undefined,
     setActiveSubAccountId: (subAccountId: number | undefined) => {
       get().set((s) => {
         s.activeSubAccountId = subAccountId;

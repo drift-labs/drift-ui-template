@@ -66,7 +66,7 @@ export const useUserManagement = () => {
     selectedMarketIndex: number;
     amount: string;
   }) => {
-    if (!connected || !drift) return;
+    if (!connected || !drift || !publicKey) return;
 
     const selectedSpotMarketConfig = spotMarketConfigs.find(
       (marketConfig) => marketConfig.marketIndex === params.selectedMarketIndex,
