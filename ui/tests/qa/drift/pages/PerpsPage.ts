@@ -27,7 +27,7 @@ export default class PerpsPage extends BasePage {
 
     async placePerpetualOrder(assetPair: string, orderType:string, sizeInput: string, limitPrice: string) {
         await this.selectMarketDropdown.click();
-        await this.page.getByText(assetPair).click();
+        await this.page.getByText(assetPair).last().click();
         await this.orderTypeDropdown.click();
         await this.page.selectOption('select[aria-hidden="true"]', { label: orderType }, { timeout: 10000 });
         await this.page.keyboard.press('Escape');

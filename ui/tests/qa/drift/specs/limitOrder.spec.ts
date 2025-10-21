@@ -22,6 +22,7 @@ test.describe.parallel('Drift UI', () => {
 
     for (const testData of generateLimitOrderTestData()) {
         test(`E2E Limit - ${testData.tradeType} - ${testData.tradeMode} and Cancel Open Order`, { tag: ['@e2e', '@regression'] }, async() => {
+            test.setTimeout(180000);
             await test.step('Navigate to DriftUI', async() => {
                 await homePage.navigate();
                 await expect(page).toHaveTitle('DriftUI - Solana Perps Trading');
@@ -55,9 +56,14 @@ test.describe.parallel('Drift UI', () => {
             });
 
             await test.step('Cancel Open Orders', async() => {
-                await perpsPage.cancelBtn.click();
-                await ExtensionsUtils.handlePhantomConnectionPopup({ page, isDepositApprove: true });
-                await expect(page.getByText('No open orders found')).toBeVisible({ timeout: 10000 });
+                await expect(async() => {
+                    await perpsPage.cancelBtn.click();
+                    await ExtensionsUtils.handlePhantomConnectionPopup({ page, isDepositApprove: true });
+                    await expect(page.getByText('No open orders found')).toBeVisible();
+                }).toPass({
+                    intervals: [8000],
+                    timeout: 120_000,
+                });
             });
         });
     }

@@ -74,8 +74,11 @@ export default class ExtensionsUtils {
         }
         if (popupPage && options.isDepositApprove) {
             await popupPage.getByText('Proceed anyway (unsafe)').click();
+            await popupPage.waitForTimeout(1000); // TODO: Need to improve
             await popupPage.getByText('Confirm (unsafe)').click();
+            await popupPage.waitForTimeout(1000); // TODO: Need to improve
             await popupPage.getByTestId('acknowledge--button').click();
+            await popupPage.waitForTimeout(1000); // TODO: Need to improve
             await popupPage.getByText('Yes, confirm (unsafe)').click();
         }
 
