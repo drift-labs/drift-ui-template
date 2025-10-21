@@ -13,6 +13,26 @@ export abstract class BasePage {
         await this.page.waitForLoadState('networkidle', { timeout });
     }
 
+    async waitForHealthyState(): Promise<void> {
+     // Wait for health check endpoint to respond with 200
+      await this.page.waitForResponse(
+        async (response) => {
+          const url = response.url();
+          const isHealth = url.endsWith('/health') || url.includes('/health?');
+          if (!isHealth) return false;
+
+          const status = response.status();
+          if (status === 200) {
+            console.log(`Health check OK (${url})`);
+            return true;
+          }
+
+          console.warn(`Health check failed (${url} - ${status})`);
+          return false;
+        }
+      );
+    }
+
     async clickElement(selector: string | Locator): Promise<void> {
         const element = typeof selector === 'string' ? this.page.locator(selector) : selector;
         await element.waitFor({ state: 'visible' });

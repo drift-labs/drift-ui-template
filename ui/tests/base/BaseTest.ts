@@ -15,6 +15,8 @@ export const test = testWithSynpress(
   })
 )
 
+export const sleep = (ms: number) => new Promise(res => setTimeout(res, ms));
+
 
 // Export Playwright’s expect for convenience
 export const { expect } = test

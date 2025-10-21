@@ -10,12 +10,27 @@ test.describe('Place limit order', () => {
     let perpsPage: PerpetualsPage;
 
 
-    test.beforeEach(async ({ page }) => {
+    test.beforeEach(async ({ page, context }) => {
         homePage = new HomePage(page);
         perpsPage = new PerpetualsPage(page);
 
         // Navigate to the homepage
-        await page.goto('/')
+        await page.goto('/');
+        await homePage.waitForHealthyState();
+
+        // Close any blank tabs opened automatically
+        const pages = context.pages();
+        for (const p of pages) {
+            const url = p.url();
+            if (url === 'about:blank') {
+            await p.close();
+            }
+        }
+    });
+
+    test.afterEach(async ({ page, context }) => {
+      await page.close();
+      await context.close();
     });
 
     [
@@ -27,6 +42,8 @@ test.describe('Place limit order', () => {
             phantomPage,
             extensionId,
             }) => {
+
+            test.setTimeout(70000);
             
             const phantom = await createPhantomWallet(context, phantomPage, extensionId)
 
@@ -63,7 +80,6 @@ test.describe('Place limit order', () => {
             await perpsPage.assertElementText(perpsPage.openOrderDataLocator.nth(2), 'Limit');
             await perpsPage.assertElementText(perpsPage.openOrderDataLocator.nth(3), `0 / ${size}`);
             await perpsPage.assertElementText(perpsPage.openOrderDataLocator.nth(4), `$${limitPrice}.0000`);
-
 
             await perpsPage.cancelOrderCreated();
             await phantom.confirmSignature();

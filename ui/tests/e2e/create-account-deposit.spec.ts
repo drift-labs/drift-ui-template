@@ -9,12 +9,27 @@ test.describe('Create account and Deposit', () => {
     let userPage: UserPage;
 
 
-    test.beforeEach(async ({ page }) => {
+    test.beforeEach(async ({ page, context }) => {
         homePage = new HomePage(page);
         userPage = new UserPage(page);
 
         // Navigate to the homepage
-        await page.goto('/')
+        await page.goto('/');
+        await homePage.waitForHealthyState();
+
+        // Close any blank tabs opened automatically
+        const pages = context.pages();
+        for (const p of pages) {
+            const url = p.url();
+            if (url === 'about:blank') {
+            await p.close();
+            }
+        }
+    });
+
+    test.afterEach(async ({ page, context }) => {
+      await page.close();
+      await context.close();
     });
 
         test('TC-CA-001 - Create account and Deposit (happy path)', async ({
@@ -143,6 +158,8 @@ test.describe('Create account and Deposit', () => {
 
             // Connect Wallet to the dapp
             await phantom.connectToDapp();
+
+            await homePage.navigateToUser();
 
             //Verify de create account remains disable
             await expect(userPage.createAccountButton)

@@ -31,5 +31,5 @@ run_test "372601743e514664ca3e" "place-limit-order.spec.ts" "TC-PL-003"
 run_test "372601743e514664ca3e" "place-limit-order.spec.ts" "TC-GEN-001"
 run_test "fbb8f412a11c037fe259" "place-limit-order.spec.ts" "TC-PL-004"
 
-# Show merged report for all tests
-npx playwright show-report reports/*
+# Merge JSON reports and generate combined HTML report
+node scripts/merge-reports.js && node scripts/generate-html-report.js

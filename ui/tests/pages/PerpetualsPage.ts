@@ -1,6 +1,7 @@
 import {expect, Page} from '@playwright/test';
 import {BasePage} from "../base/BasePage";
 import {OrderDirection, OrderTypeValue, PERPETUALS_VALUE, SELECTORS, SizeType} from "../config/constants";
+import { sleep } from '../base/BaseTest';
 
 export class PerpetualsPage extends BasePage {
     constructor(page: Page) {
@@ -67,7 +68,7 @@ export class PerpetualsPage extends BasePage {
     }
 
     async cancelOrderCreated(): Promise<void> {
-        await this.page.waitForTimeout(10000);
+        await sleep(12000);
         await this.clickElement(this.cancelOrderButton);
     }
 
