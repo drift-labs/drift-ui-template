@@ -1,0 +1,2 @@
+import{c as i}from"./chunk-UTOBJRXZ.js";import{f as c,h as r,n}from"./chunk-SVG5OEFH.js";r();n();var e=c(i()),m=({delay:t=300,children:a,delayedChildren:d})=>{let[s,u]=e.default.useState(!1);return(0,e.useEffect)(()=>{let o;return t&&(o=setTimeout(()=>{u(!0)},t)),()=>{o&&clearTimeout(o)}},[t]),e.default.createElement(e.default.Fragment,null,s?d:a)};export{m as a};
+//# sourceMappingURL=chunk-4DQNYOFM.js.map
