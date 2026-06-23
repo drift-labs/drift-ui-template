@@ -95,8 +95,8 @@ tradableMarkets: [
 
 Find available markets:
 
-- [Perpetual Markets](https://github.com/drift-labs/protocol-v2/blob/master/sdk/src/constants/perpMarkets.ts)
-- [Spot Markets](https://github.com/drift-labs/protocol-v2/blob/master/sdk/src/constants/spotMarkets.ts)
+- [Perpetual Markets](https://github.com/velocity-exchange/protocol-v2/blob/master/sdk/src/constants/perpMarkets.ts)
+- [Spot Markets](https://github.com/velocity-exchange/protocol-v2/blob/master/sdk/src/constants/spotMarkets.ts)
 
 ## 🏃‍♂️ Usage
 
@@ -193,7 +193,7 @@ ui/
 ## 📚 Resources
 
 - [Drift Protocol Documentation](https://docs.drift.trade/)
-- [Drift SDK GitHub](https://github.com/drift-labs/protocol-v2)
+- [Drift SDK GitHub](https://github.com/velocity-exchange/protocol-v2)
 - [Solana Documentation](https://docs.solana.com/)
 - [Next.js Documentation](https://nextjs.org/docs)
 
@@ -219,5 +219,5 @@ The template is optimized for performance with:
 For questions and support:
 
 - [Drift Discord](https://discord.gg/drift-trade)
-- [GitHub Issues](https://github.com/drift-labs/protocol-v2/issues)
+- [GitHub Issues](https://github.com/velocity-exchange/protocol-v2/issues)
 - [Drift Documentation](https://docs.drift.trade/)
