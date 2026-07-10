@@ -34,7 +34,6 @@ A modern, responsive UI template for integrating with the Drift protocol. This t
 ## 🛠️ Installation
 
 ### 1. Clone the repository
-
 ```bash
 git clone <your-repository-url>
 cd drift-ui-template
@@ -180,6 +179,21 @@ ui/
 │   └── constants/    # Application constants
 ├── public/           # Static assets
 └── package.json      # Dependencies and scripts
+|-- tests             # Autommated tests
+```
+
+## Drift UI TESTS
+
+Usage Instructions
+
+```sh
+cd src/tests/e2e
+
+bun install
+
+bun run wdio 
+or
+BASE_URL=[BASE_URL] bun run wdio
 ```
 
 ## 🤝 Contributing
