@@ -1,0 +1,2 @@
+import{h as s,n as r}from"./chunk-64CIGK2X.js";s();r();var e;function c(t){return o(t).segments_count}function i(t){o(t).segments_count+=1}function l(t){o(t).records_count+=1}function _(t,n){o(t).segments_total_raw_size+=n}function d(t){return e?.get(t)}function o(t){e||(e=new Map);let n;return e.has(t)?n=e.get(t):(n={records_count:0,segments_count:0,segments_total_raw_size:0},e.set(t,n),e.size>1e3&&a()),n}function a(){if(!e)return;let t=e.keys().next().value;t&&e.delete(t)}export{c as a,i as b,l as c,_ as d,d as e};
+//# sourceMappingURL=chunk-3JLWNHUO.js.map

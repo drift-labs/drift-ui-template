@@ -1,0 +1,30 @@
+{
+  "name": "automation",
+  "version": "1.0.0",
+  "description": "QA automation",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "eslint": "npx eslint .",
+    "e2e": "TARGET_ENV=devnet npx playwright test --config=drift/playwright.config.ts --workers=1 --project=chromium --grep @e2e --headed --trace on"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.15.0",
+    "@playwright/test": "^1.55.1",
+    "@types/node": "^24.5.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.15.0",
+    "eslint": "^9.15.0",
+    "eslint-plugin-playwright": "2.1.0",
+    "@types/uuid": "^10.0.0",
+    "dotenv": "^16.0.1"
+  },
+  "dependencies": {
+    "uuid": "^10.0.0",
+    "bignumber.js": "^9.3.1"
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
+}

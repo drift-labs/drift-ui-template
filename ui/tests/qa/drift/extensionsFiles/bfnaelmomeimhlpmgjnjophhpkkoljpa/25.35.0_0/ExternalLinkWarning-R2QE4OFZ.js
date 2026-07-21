@@ -1,0 +1,8 @@
+import{b as d}from"./chunk-J26VE65N.js";import{d as k}from"./chunk-OZFKX4E3.js";import{k as f}from"./chunk-TALMQQTZ.js";import"./chunk-WSJ272XI.js";import{a as x,b as g}from"./chunk-S32BDL22.js";import"./chunk-BUTFRTU6.js";import"./chunk-HX3WMS5S.js";import{d as s}from"./chunk-ZTFOFBVC.js";import{m as c,oa as p}from"./chunk-FVUSQHVT.js";import"./chunk-W47K3OCY.js";import{c as m}from"./chunk-25TPEQ2Q.js";import"./chunk-E7B2SEGG.js";import"./chunk-XD32MQ4W.js";import"./chunk-HTY647YJ.js";import"./chunk-E2A6YDRV.js";import"./chunk-4XTMHWN2.js";import{X as l,c as u,ya as i}from"./chunk-BEUYJGED.js";import"./chunk-3C334UTS.js";import"./chunk-3JLWNHUO.js";import"./chunk-KHOMEOLW.js";import{f as C,h as t,n as a}from"./chunk-64CIGK2X.js";t();a();var r=C(u());var h=c.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`,L=r.default.memo(({url:n})=>{let{t:o}=l(),{hideExternalLinkWarningModal:e}=d(),y=(0,r.useCallback)(()=>{m.capture("collectibleExternalLinkOpened",{data:{url:n.toString()}}),e(),self.open(n.href,"_blank")},[e,n]);return r.default.createElement(h,null,r.default.createElement(f,null),r.default.createElement(k,{icon:r.default.createElement(g,{color:x(i.colors.legacy.spotWarning,.1),diameter:94},r.default.createElement(p,{width:54,height:54,circleFill:i.colors.legacy.spotWarning})),primaryText:o("externalLinkWarningTitle"),secondaryText:o("externalLinkWarningDescription",{url:n.host})}),r.default.createElement(s,{primaryText:o("commandCancel"),secondaryText:o("commandContinue"),onPrimaryClicked:e,onSecondaryClicked:y}))}),j=L;export{L as ExternalLinkWarning,j as default};
+//# sourceMappingURL=ExternalLinkWarning-R2QE4OFZ.js.map

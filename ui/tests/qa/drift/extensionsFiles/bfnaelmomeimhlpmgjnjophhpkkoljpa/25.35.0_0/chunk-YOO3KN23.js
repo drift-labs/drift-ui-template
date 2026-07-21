@@ -1,0 +1,2 @@
+import{$ as T}from"./chunk-QSYOXIBV.js";import{R as o}from"./chunk-4XTMHWN2.js";import{h as t,n as e}from"./chunk-64CIGK2X.js";t();e();var a=1e-5,m="0,0.[00000]",i="0,0.[00]a",A=1e6,O=(u,r=m)=>{let n=new o(u);if(n.abs().isGreaterThan(0)&&n.abs().isLessThan(a))return`< ${n.isLessThan(0)?"-":""}${a}`;let s=(0,T.default)(n.toNumber());return r===m&&n.isGreaterThanOrEqualTo(A)?s.format(i):s.format(r)};export{O as a};
+//# sourceMappingURL=chunk-YOO3KN23.js.map
